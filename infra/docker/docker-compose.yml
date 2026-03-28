@@ -1,0 +1,17 @@
+services:
+  db:
+    image: postgis/postgis:16-3.4
+    container_name: igovme_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: igovme
+      POSTGRES_USER: igovme
+      POSTGRES_PASSWORD: igovme_dev_password
+    ports:
+      - "5432:5432"
+    volumes:
+      - igovme_pgdata:/var/lib/postgresql/data
+      - ./init:/docker-entrypoint-initdb.d
+
+volumes:
+  igovme_pgdata:
